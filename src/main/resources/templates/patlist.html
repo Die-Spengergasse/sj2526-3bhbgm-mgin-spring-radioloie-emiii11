@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Patients List</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Patienten</title>
 </head>
 <body>
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>name</th>
-                <th>birth</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="p : ${patients}">
-                <td th:text="${p.name}"></td>
-                <td th:text="${p.birth}"></td>
-            </tr>
-        </tbody>
 
-    </table>
+<h1>Patienten</h1>
 
-    <p>
-        <a href="/patient/add">new patient</a>
-    </p>
-</div>
+<a href="/patient/add">Neuer Patient</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Nachname</th>
+        <th>Aktionen</th>
+    </tr>
+
+    <tr th:each="p : ${patients}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.surname}"></td>
+        <td>
+            <a th:href="@{'/patient/edit/' + ${p.id}}">Bearbeiten</a>
+            <a th:href="@{'/patient/delete/' + ${p.id}}">Löschen</a>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Greeting</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Start</title>
 </head>
 <body>
-<div class="container">
-    <h1>Hallo</h1>
-    Datum: <span th:text="${today}"></span>
-    <div>
-        <a href="/patient/list">patient list</a>
-    </div>
-</div>
+
+<h1>Radiologie System</h1>
+
+<p>Heute: <span th:text="${today}"></span></p>
+
+<ul>
+    <li><a href="/patient/list">Patienten</a></li>
+    <li><a href="/device/list">Geräte</a></li>
+    <li><a href="/reservation/list">Reservierungen</a></li>
+</ul>
+
 </body>
 </html>

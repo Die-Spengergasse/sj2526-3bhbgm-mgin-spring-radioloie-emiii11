@@ -1,46 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Neuen Patienten registrieren</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Patient hinzufügen</title>
 </head>
 <body>
-<div class="container">
-    <h2>Neuen Patienten registrieren</h2>
-    <form th:action="@{/patient/add}" th:object="${patient}" method="post">
-        <div class="form-group">
-            <label>Sozialversicherungsnummer</label>
-            <input type="text" th:field="*{socialSecurityNumber}" class="form-control" placeholder="z.B. 1234567890" required>
-        </div>
 
-        <div class="form-group">
-            <label>Vorname</label>
-            <input type="text" th:field="*{firstName}" class="form-control" placeholder="Vorname" required>
-        </div>
+<h1>Patient</h1>
 
-        <div class="form-group">
-            <label>Nachname</label>
-            <input type="text" th:field="*{lastName}" class="form-control" placeholder="Nachname" required>
-        </div>
+<form th:action="@{/patient/add}" th:object="${patient}" method="post">
+    <input type="hidden" th:field="*{id}"/>
 
-        <div class="form-group">
-            <label>Geschlecht</label>
-            <select th:field="*{gender}" class="form-control" required>
-                <option value="">-- Bitte wählen --</option>
-                <option value="männlich">Männlich</option>
-                <option value="weiblich">Weiblich</option>
-                <option value="divers">Divers</option>
-            </select>
-        </div>
+    Name: <input type="text" th:field="*{name}"/><br>
+    Nachname: <input type="text" th:field="*{surname}"/><br>
+    SVNR: <input type="text" th:field="*{socialsecuritynumber}"/><br>
+    Geschlecht: <input type="text" th:field="*{gender}"/><br>
+    Geburtsdatum: <input type="date" th:field="*{birth}"/><br>
 
-        <div class="form-group">
-            <label>Geburtsdatum</label>
-            <input type="date" th:field="*{birth}" class="form-control" required>
-        </div>
+    <button type="submit">Speichern</button>
+</form>
 
-        <button type="submit" class="btn btn-primary">Patient speichern</button>
-    </form>
-</div>
 </body>
 </html>

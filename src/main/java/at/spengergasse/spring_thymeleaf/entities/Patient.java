@@ -1,22 +1,21 @@
 package at.spengergasse.spring_thymeleaf.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "p_patients")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String socialSecurityNumber;
-    private String firstName;
-    private String lastName;
+    private String socialsecuritynumber;
+    private String name;
+    private String surname;
     private String gender;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birth;
 
     public int getId() {
@@ -27,28 +26,20 @@ public class Patient {
         this.id = id;
     }
 
-    public String getSocialSecurityNumber() {
-        return socialSecurityNumber;
+    public String getSocialsecuritynumber() {
+        return socialsecuritynumber;
     }
 
-    public void setSocialSecurityNumber(String socialSecurityNumber) {
-        this.socialSecurityNumber = socialSecurityNumber;
+    public void setSocialsecuritynumber(String svnr) {
+        this.socialsecuritynumber = svnr;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getGender() {
@@ -57,6 +48,14 @@ public class Patient {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getBirth() {
