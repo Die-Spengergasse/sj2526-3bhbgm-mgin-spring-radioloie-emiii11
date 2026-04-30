@@ -2,22 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Patient hinzufügen</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Patient</h1>
+<div class="container">
 
-<form th:action="@{/patient/add}" th:object="${patient}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+    <h1 class="mb-3">Patient hinzufügen</h1>
 
-    Name: <input type="text" th:field="*{name}"/><br>
-    Nachname: <input type="text" th:field="*{surname}"/><br>
-    SVNR: <input type="text" th:field="*{socialsecuritynumber}"/><br>
-    Geschlecht: <input type="text" th:field="*{gender}"/><br>
-    Geburtsdatum: <input type="date" th:field="*{birth}"/><br>
+    <form th:action="@{/patient/add}" th:object="${patient}" method="post">
 
-    <button type="submit">Speichern</button>
-</form>
+        <div class="container">
+
+            <label>Vorname</label>
+            <input type="text" class="form-control w-auto" th:field="*{name}">
+
+            <label>Nachname</label>
+            <input type="text" class="form-control w-auto" th:field="*{surname}">
+
+            <label>SVNR</label>
+            <input type="text" class="form-control w-auto" th:field="*{socialsecuritynumber}">
+
+            <label>Geschlecht</label>
+            <select class="form-select w-auto" th:field="*{gender}">
+                <option value="M">Männlich</option>
+                <option value="F">Weiblich</option>
+            </select>
+
+            <label>Geburtsdatum</label>
+            <input type="date" class="form-control w-auto" th:field="*{birth}">
+
+            <button class="btn btn-primary">Speichern</button>
+
+        </div>
+
+    </form>
+
+</div>
 
 </body>
 </html>

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/patient")
 public class PatientController {
@@ -17,33 +19,32 @@ public class PatientController {
     }
 
     @GetMapping("/list")
-    public String patients(Model model) {
+    public String list(Model model) {
         model.addAttribute("patients", patientRepository.findAll());
         return "patlist";
     }
 
     @GetMapping("/add")
-    public String addPatient(Model model) {
+    public String addForm(Model model) {
         model.addAttribute("patient", new Patient());
         return "add_patient";
     }
 
     @PostMapping("/add")
-    public String addPatient(@ModelAttribute Patient patient) {
+    public String addSave(@ModelAttribute Patient patient, Model model) {
+
+        if (patient.getBirth().isAfter(LocalDate.now())) {
+            model.addAttribute("error", "Geburtsdatum darf nicht in der Zukunft liegen!");
+            return "add_patient";
+        }
+
+        if (patient.getSocialsecuritynumber() == null ||
+                !patient.getSocialsecuritynumber().matches("\\d{10}")) {
+            model.addAttribute("error", "Ungültige Sozialversicherungsnummer!");
+            return "add_patient";
+        }
+
         patientRepository.save(patient);
-        return "redirect:/patient/list";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String editPatient(@PathVariable Long id, Model model) {
-        Patient patient = patientRepository.findById(id).orElseThrow();
-        model.addAttribute("patient", patient);
-        return "add_patient";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deletePatient(@PathVariable Long id) {
-        patientRepository.deleteById(id);
         return "redirect:/patient/list";
     }
 }
